@@ -47,6 +47,7 @@
                 
                 border-radius: 5px;
                 margin-top: 50px;
+                margin-bottom: 10px;
                 height: 60px;
                 width: 200px;
                 font-family: 'Montserrat', sans-serif;
@@ -100,6 +101,7 @@
         <div id="main">
             <h1>ASOS RUSSIA</h1>            
             <button id="order">Заказать</button>
+            
             <button id="cart">Корзина</button>
         </div>
 
@@ -114,8 +116,10 @@
             <div id="error"></div>
             <button id="user-info">Готово</button>
         </form>
-        <form id="cart">
+
+        <form id="cart-form">
             <h1>Корзина</h1>
+            <button id="cart-info">Готово</button>
         </form>
 
 
@@ -125,11 +129,16 @@
             tg.expand();
             
             let order = document.getElementById("order")
+            let cart = document.getElementById("cart")
             let user_info = document.getElementById("user-info")
 
             order.addEventListener("click" , () => {
                 document.getElementById("main").style.display = "none";
                 document.getElementById("form").style.display = "block";
+            });
+            cart.addEventListener("click", () => {
+                document.getElementById("main").style.display = "none";
+                document.getElementById("cart-form").style.display = "block";
             });
 
             user_info.addEventListener("click", () => {
