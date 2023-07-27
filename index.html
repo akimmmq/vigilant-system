@@ -144,17 +144,17 @@
                     document.getElementById("error").innerText = 'Неправильно введен город';
                     return;
                 }
-                if (!street.includes("Ул") || street.length < 2){
+                if (phone.length < 11 && (phone.includes("+7") || phone.includes("8"))){
+                    document.getElementById("error").innerText = 'Неправильно введен номер';
+                    return;
+                }
+                if (street.length < 2){
                     document.getElementById("error").innerText = 'Неправильно введена улица';
                     return;
                 }
 
                 if (zip.length != 6){
                     document.getElementById("error").innerText = 'Неправильно введен почтовый индекс';
-                    return;
-                }
-                if (phone.length < 11 && (phone.includes("+7") || phone.includes("8"))){
-                    document.getElementById("error").innerText = 'Неправильно введен номер';
                     return;
                 }
 
