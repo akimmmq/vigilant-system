@@ -72,8 +72,9 @@
                 display: none;
                 text-align: center;
             }
-
+            
             input {
+                
                 width: 90%;
                 outline: none;
                 margin: 10px 5%;
@@ -81,6 +82,8 @@
                 font-size: 14px;
                 border: 2px solid silver;
                 border-radius: 5px;
+
+                box-sizing: border-box;
             }
 
             input:focus{
@@ -136,19 +139,18 @@
                     document.getElementById("error").innerText = 'Введите имя';
                     return;
                 } 
-                // if (!email.includes('@')){
-                //     document.getElementById("error").innerText = 'Неправильно введена почта';
-                //     return;
-                // }
+                
                 if (city.length < 2){
                     document.getElementById("error").innerText = 'Неправильно введен город';
                     return;
                 }
+                
                 if (phone.length < 11 && (phone.includes("+7") || phone.includes("8"))){
                     document.getElementById("error").innerText = 'Неправильно введен номер';
                     return;
                 }
-                if (street.length < 2){
+                
+                if (  street.length < 2){
                     document.getElementById("error").innerText = 'Неправильно введена улица';
                     return;
                 }
@@ -163,7 +165,7 @@
                     phone: phone,
                     city: city,
                     street: street,
-                    zip : zip
+                    zip : zip,
                 }
                 tg.sendData(JSON.stringify(data));
                 tg.close();
