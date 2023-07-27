@@ -82,9 +82,10 @@
 
         <form id="form">
             <input type="text" placeholder="Имя" id="user-name">
-            <input type="text" placeholder="Email" id="user-name">
-            <input type="text" placeholder="Адрес" id="user-name">
-            <input type="text" placeholder="Номер телефона" id="user-name">
+            <input type="text" placeholder="Email" id="user-email">
+            <input type="text" placeholder="Адрес" id="user-adress">
+            <input type="text" placeholder="Номер телефона" id="user-phone">
+            <div id="error"></div>
             <button id="user-info">Готово</button>
         </form>
 
@@ -92,6 +93,41 @@
         <script src="https://telegram.org/js/telegram-web-app.js"></script>
         <script>
             let tg = window.Telegram.WebApp;
+            tg.expand();
+            
+            let buy = document.getElementById("buy")
+            let user_info = document.getElementById("user-info")
+
+            buy.addEventListener("click" , () => {
+                document.getElementById("main").style.display = "none";
+                document.getElementById("main").style.display = "block";
+            })
+
+            order.addEventListener("click", () => {
+                let name = document.getElementById("user-name").value;
+                var email = document.getElementById("user-email").value;
+                let adress = document.getElementById("user-adress").value;
+                let phone = document.getElementById("user-phone").value;
+
+                if (name.length < 3) {
+                    document.getElementById("error").innerText = 'Неправильно введено имя (Ян пошел нахуй)';
+                    return;
+                } 
+                if (phone.length < 11){
+                    document.getElementById("error").innerText = 'Неправильно введен номер';
+                    return;
+                }
+                if (!email.includes('@')){
+                    document.getElementById("error").innerText = 'Неправильно введена почта';
+                    return;
+                }
+                if (adress.length < 5){
+                    document.getElementById("error").innerText = 'Неправильно введен адрес';
+                    return;
+                }
+                tg.close();
+            })
+
             
         </script>
     </body>
