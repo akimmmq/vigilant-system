@@ -44,16 +44,21 @@
 
             button {
                 border: 0;
+                
                 border-radius: 5px;
                 margin-top: 50px;
                 height: 60px;
                 width: 200px;
+                font-family: 'Montserrat', sans-serif;
                 font-size: 20px;
                 font-weight: 500;
+
                 cursor: pointer;
                 transition: all 500ms ease;
+
                 background: var(--tg-theme-button-color);
 	            color: var(--tg-theme-button-text-color);
+                
                 margin: 0 auto;
                 display: block; 
                 
@@ -90,7 +95,7 @@
     <body>
         <div id="main">
             <h1>Store</h1>            
-            <button id="buy">Заказать</button>
+            <button id="order">Заказать</button>
         </div>
 
         <form id="form">
@@ -108,15 +113,16 @@
             let tg = window.Telegram.WebApp;
             tg.expand();
             
-            let buy = document.getElementById("buy")
+            let order = document.getElementById("order")
             let user_info = document.getElementById("user-info")
 
-            buy.addEventListener("click" , () => {
+            order.addEventListener("click" , () => {
                 document.getElementById("main").style.display = "none";
-                document.getElementById("main").style.display = "block";
-            })
+                document.getElementById("form").style.display = "block";
+            });
 
-            order.addEventListener("click", () => {
+            user_info.addEventListener("click", () => {
+                document.getElementById("error").innerText = ' ';
                 let name = document.getElementById("user-name").value;
                 var email = document.getElementById("user-email").value;
                 let adress = document.getElementById("user-adress").value;
@@ -138,8 +144,16 @@
                     document.getElementById("error").innerText = 'Неправильно введен адрес';
                     return;
                 }
+
+                let userData = {
+                    name: name,
+                    email: email,
+                    adress: adress,
+                    phone: phopne,
+                }
+                tg.sendData(JSON.stringify(data));
                 tg.close();
-            })
+            });
 
             
         </script>
