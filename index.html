@@ -100,9 +100,11 @@
 
         <form id="form">
             <input type="text" placeholder="Имя" id="user-name">
-            <input type="text" placeholder="Email" id="user-email">
-            <input type="text" placeholder="Адрес" id="user-adress">
             <input type="text" placeholder="Номер телефона" id="user-phone">
+            <input type="text" placeholder="Город" id="user-city">
+            <input type="text" placeholder="Улица" id="user-street">
+            <input type="text" placeholder="Почтовый индекс" id="user-zip">
+            
             <div id="error"></div>
             <button id="user-info">Готово</button>
         </form>
@@ -123,33 +125,45 @@
 
             user_info.addEventListener("click", () => {
                 document.getElementById("error").innerText = ' ';
+                
                 let name = document.getElementById("user-name").value;
-                var email = document.getElementById("user-email").value;
-                let adress = document.getElementById("user-adress").value;
                 let phone = document.getElementById("user-phone").value;
-
-                if (name.length < 3) {
-                    document.getElementById("error").innerText = 'Неправильно введено имя (Ян пошел нахуй)';
+                let city = document.getElementById("user-city").value;
+                let street =  document.getElementById("user-street").value;
+                let zip = document.getElementById("user-zip").value;
+                
+                if (name.length < 2) {
+                    document.getElementById("error").innerText = 'Введите имя';
                     return;
                 } 
-                if (phone.length < 11){
+                // if (!email.includes('@')){
+                //     document.getElementById("error").innerText = 'Неправильно введена почта';
+                //     return;
+                // }
+                if (city.length < 2){
+                    document.getElementById("error").innerText = 'Неправильно введен город';
+                    return;
+                }
+                if (!street.includes("Ул") || street.length < 2){
+                    document.getElementById("error").innerText = 'Неправильно введена улица';
+                    return;
+                }
+
+                if (zip.length != 6){
+                    document.getElementById("error").innerText = 'Неправильно введен почтовый индекс';
+                    return;
+                }
+                if (phone.length < 11 && (phone.includes("+7") || phone.includes("8"))){
                     document.getElementById("error").innerText = 'Неправильно введен номер';
-                    return;
-                }
-                if (!email.includes('@')){
-                    document.getElementById("error").innerText = 'Неправильно введена почта';
-                    return;
-                }
-                if (adress.length < 5){
-                    document.getElementById("error").innerText = 'Неправильно введен адрес';
                     return;
                 }
 
                 let userData = {
                     name: name,
-                    email: email,
-                    adress: adress,
-                    phone: phopne,
+                    phone: phone,
+                    city: city,
+                    street: street,
+                    zip : zip
                 }
                 tg.sendData(JSON.stringify(data));
                 tg.close();
