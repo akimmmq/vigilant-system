@@ -124,7 +124,46 @@
         <script>
             let tg = window.Telegram.WebApp;
             tg.expand();
-            
+
+            // Get Item info from database
+            // function getData() {
+            //     fetch('/')
+            //         .then(response => response.json())
+            //         .then(data => {
+            //             // Полученные данные обрабатываем и отображаем на странице
+            //             // Например, создаем блоки "item" для каждого элемента
+            //             const itemsContainer = document.getElementById('items-container');
+
+            //             data.forEach(item => {
+            //                 const itemDiv = document.createElement('div');
+            //                 itemDiv.classList.add('item');
+
+            //                 const itemName = document.createElement('h2');
+            //                 itemName.textContent = item.NameItem;
+
+            //                 const itemPrice = document.createElement('p');
+            //                 itemPrice.textContent = `Цена: ${item.PriceRub} руб.`;
+
+            //                 const itemImage = document.createElement('img');
+            //                 itemImage.src = item.ImageUrl;
+            //                 itemImage.alt = item.NameItem;
+
+            //                 itemDiv.appendChild(itemName);
+            //                 itemDiv.appendChild(itemPrice);
+            //                 itemDiv.appendChild(itemImage);
+
+            //                 itemsContainer.appendChild(itemDiv);
+            //             });
+            //         })
+            //         .catch(error => console.error('Ошибка:', error));
+            //     }
+
+            // // Вызываем функцию для получения данных при загрузке страницы
+            // window.addEventListener('load', getData);
+
+
+
+            // Get info from user
             let order = document.getElementById("order")
             let cart = document.getElementById("cart")
             let cart_info = document.getElementById("cart-info")
@@ -144,8 +183,9 @@
                 document.getElementById("main").style.display = "block";
             })
 
+
             user_info.addEventListener("click", () => {
-                document.getElementById("error").innerText = ' ';
+                document.getElementById("error").innerText = ' '; 
                 
                 let name = document.getElementById("user-name").value;
                 let phone = document.getElementById("user-phone").value;
@@ -185,7 +225,7 @@
                     street: street,
                     zip : zip,
                 }
-                tg.sendData(JSON.stringify(data));
+                tg.sendData(JSON.stringify(userData));
                 tg.close();
             });
 
